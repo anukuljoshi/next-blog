@@ -1,44 +1,34 @@
 // next/react
-import type { NextPage } from "next";
+import type { GetStaticProps } from "next";
 
 // components
 import Hero from "../components/home/Hero";
 import FeaturedPosts from "../components/home/FeaturedPosts";
 
-const DUMMY_POSTS: Post [] = [
-    {
-        title: "Title 1",
-        slug: "title-1",
-        date: "2021-11-08",
-        image: "title-1.jpg",
-        excerpt: "this is an excerpt",
-        content: "this is some content"
-    },
-    {
-        title: "Title 2",
-        slug: "title-2",
-        date: "2021-11-08",
-        image: "title-1.jpg",
-        excerpt: "this is an excerpt",
-        content: "this is some content"
-    },
-    {
-        title: "Title 3",
-        slug: "title-3",
-        date: "2021-11-08",
-        image: "title-1.jpg",
-        excerpt: "this is an excerpt",
-        content: "this is some content"
-    }
-]
+// utils
+import { getFeaturedPosts } from "../helpers/post-utils";
 
-const Home: NextPage = () => {
+interface HomeProps {
+	posts: Post[];
+}
+
+const Home = ({ posts }: HomeProps) => {
 	return (
 		<>
 			<Hero />
-            <FeaturedPosts posts={DUMMY_POSTS} />
+			<FeaturedPosts posts={posts} />
 		</>
 	);
+};
+
+export const getStaticProps: GetStaticProps = (context) => {
+	const featuredPosts = getFeaturedPosts();
+	return {
+		props: {
+			posts: featuredPosts,
+		},
+		revalidate: 24*60*60,
+	};
 };
 
 export default Home;
