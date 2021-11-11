@@ -1,5 +1,6 @@
 // next/react
 import type { GetStaticProps } from "next";
+import Head from "next/head";
 
 // components
 import Hero from "../components/home/Hero";
@@ -15,6 +16,13 @@ interface HomeProps {
 const Home = ({ posts }: HomeProps) => {
 	return (
 		<>
+			<Head>
+				<title>AJ Blog</title>
+				<meta
+					name={"description"}
+					content={"I post about programming and web development."}
+				/>
+			</Head>
 			<Hero />
 			<FeaturedPosts posts={posts} />
 		</>
@@ -27,7 +35,7 @@ export const getStaticProps: GetStaticProps = (context) => {
 		props: {
 			posts: featuredPosts,
 		},
-		revalidate: 24*60*60,
+		revalidate: 24 * 60 * 60,
 	};
 };
 

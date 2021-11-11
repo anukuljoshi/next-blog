@@ -1,4 +1,5 @@
 // next/react
+import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next";
 
 // components
@@ -14,6 +15,10 @@ interface PostDetailPageProps {
 const PostDetailPage = ({ post }: PostDetailPageProps) => {
 	return (
 		<>
+			<Head>
+				<title>{post.title}</title>
+				<meta name="description" content={post.excerpt} />
+			</Head>
 			<PostContent post={post} />
 		</>
 	);

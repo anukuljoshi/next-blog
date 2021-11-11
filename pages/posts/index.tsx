@@ -1,3 +1,6 @@
+// next/react
+import Head from "next/head";
+
 // components
 import { GetStaticProps } from "next";
 import AllPosts from "../../components/posts/AllPosts";
@@ -10,6 +13,10 @@ interface PostListPageProps {
 const PostListPage = ({ posts }: PostListPageProps) => {
 	return (
 		<>
+            <Head>
+                <title>All Posts</title>
+                <meta name={"description"} content={"A list of all programming posts."} />
+            </Head>
 			<AllPosts posts={posts} />
 		</>
 	);
