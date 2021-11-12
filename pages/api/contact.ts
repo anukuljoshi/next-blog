@@ -1,5 +1,8 @@
-import { MongoClient } from "mongodb";
+// next/react
 import type { NextApiHandler } from "next";
+
+// database
+import { MongoClient } from "mongodb";
 
 const handler: NextApiHandler = async (req, res) => {
 	if (req.method === "POST") {
@@ -21,8 +24,9 @@ const handler: NextApiHandler = async (req, res) => {
 			message,
 		};
 		let client, db, result;
+		const connectionString = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_CLUSTER}.zdvwj.mongodb.net/${process.env.MONGODB_COLLECTION}?retryWrites=true&w=majority`;
 		try {
-			client = await MongoClient.connect(process.env.MONGO_URI);
+			client = await MongoClient.connect(connectionString);
 			db = client.db();
 			result = await db.collection("messages").insertOne(newMessage);
 		} catch (error) {

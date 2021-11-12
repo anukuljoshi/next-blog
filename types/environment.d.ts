@@ -1,9 +1,12 @@
 declare global {
 	namespace NodeJS {
 		interface ProcessEnv {
-			MONGO_URI: string;
+			MONGODB_USERNAME: string;
+			MONGODB_PASSWORD: string;
+			MONGODB_CLUSTER: string;
+			MONGODB_COLLECTION: string;
 		}
 	}
 }
 
-export {}
+export {};
